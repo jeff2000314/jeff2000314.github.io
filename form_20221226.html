@@ -41,6 +41,12 @@
 </head>
 
 <body>
+
+    <!-- 資料處理時畫面 -->
+    <div class="d-none my-5" id="show">
+        <span>處理中...<img src="https://i.imgur.com/pm9SKUg.gif"></span>
+    </div>
+
     <main class="container">
         <h1 class="text-center mt-3">繳費通知單</h1>
 
@@ -74,8 +80,6 @@
                 op: 'api_stru_payment'
             };
 
-            let stru;
-
             $.ajax({
 
                 url: url, // 請求資料的網址
@@ -87,12 +91,28 @@
                     //......
                 },
                 success: function(result) { // 當成功接收到資料時
-                    stru = result;
+                    let stru = result;
+                    // 產生表單語法
+                    create_template('form_item', stru);
+
+                    $("date").prop({
+                        min: '2022-12-26',
+                        max: '2023-01-10'
+                    });
+
+                    let callback_url = document.getElementById('callback_url');
+                    callback_url.value = window.location.href;
                 },
                 error: function(error) { // 當接收資料失敗時
                     //......
                 }
             });
+
+        }
+        // 樣板語法
+
+        function create_template(target_id, stru) {
+            // -------變成函數 create_template(target_id, stru)
 
             let form_item = document.getElementById('form_item');
             let form_item_html = options_html = '';
@@ -198,17 +218,14 @@
             }
             form_item.innerHTML = form_item_html
 
+            // dom
             // $("#date").prop('min','2022-12-26');
             // $("#date").prop('max','2022-12-31');
-            $("date").prop({
-                min: '2022-12-26',
-                max: '2023-1-10'
-            });
+            // val()
 
-            let callback_url = document.getElementById('callback_url');
-
-            callback_url.value = window.location.href;
+            //-------------------------------------------------------結束
         }
+
 
         /*
         渲染畫面
