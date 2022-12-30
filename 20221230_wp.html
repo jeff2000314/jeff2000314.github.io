@@ -8,6 +8,10 @@
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 
 <style>
+    .form-control {
+        padding: : 0.375rem 0.75rem;
+    }
+
     input:invalid,
     select:invalid,
     textarea:invalid {
@@ -43,7 +47,6 @@
         </div>
         <input type="hidden" name="op" value="payment" id="op">
         <input type="hidden" name="callback_url" value="" id="callback_url">
-        <input type="hidden" name="callback_home_url" value="" id="callback_home_url">
         <input type="hidden" name="callback_home_url" value="" id="callback_home_url">
         <button type="submit" class="btn btn-primary w-100" id="submit">送出</button>
     </form>
