@@ -50,12 +50,13 @@
     <main class="container">
         <h1 class="text-center mt-3">繳費通知單</h1>
 
-        <form action="https://script.google.com/macros/s/AKfycbxsjRPHqZGd2_Vf4uu0LcVfjHbZpkI-K-YLGjvJVucTWV91eFPsHljZrZd751I0Ze5w/exec" method="post">
+        <form action="" method="post" id="myForm">
             <div class="row" id="form_item">
 
             </div>
             <input type="hidden" name="op" value="payment" id="op">
             <input type="hidden" name="callback_url" value="" id="callback_url">
+            <input type="hidden" name="callback_home_url" value="" id="callback_home_url">
             <button type="submit" class="btn btn-primary w-100" id="submit">送出</button>
         </form>
     </main>
@@ -76,6 +77,9 @@
             // 從遠端抓stru
 
             let url = 'https://script.google.com/macros/s/AKfycbxsjRPHqZGd2_Vf4uu0LcVfjHbZpkI-K-YLGjvJVucTWV91eFPsHljZrZd751I0Ze5w/exec';
+
+            $('#myForm').prop('action', url);
+
             let data = {
                 op: 'api_stru_payment'
             };
@@ -104,10 +108,19 @@
                         max: '2023-01-10'
                     });
 
+                    //表單網址
                     let callback_url = document.getElementById('callback_url');
                     callback_url.value = window.location.href;
+
+                    //網頁url
+                    let callback_home_url = document.getElementById('callback_home_url');
+                    let home_url = window.location.href;
+                    callback_home_url.value = home_url.replace(window.location.pathname, '');
                 },
                 error: function(error) { // 當接收資料失敗時
+                    $("#show").prop("class", "d-none my-5");
+                    console.log(error);
+
                     //......
                 }
             });

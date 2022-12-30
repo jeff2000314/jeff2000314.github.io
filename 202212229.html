@@ -108,6 +108,9 @@
                     callback_url.value = window.location.href;
                 },
                 error: function(error) { // 當接收資料失敗時
+                    $("#show").prop("class", "d-none my-5");
+                    console.log(error);
+
                     //......
                 }
             });
